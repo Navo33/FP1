@@ -6,12 +6,12 @@ object test extends App {
     def tempConversion(t:Int):Double = t * 1.8 + 32
 
     // q3
-    def volumeOfSphere(r:Int):Double = 4/3 * 3.14 * r * r * r
+    def volumeOfSphere(r:Int):Double = 4 / 3 * 3.14 * r * r * r
 
     // q4
     def shippingCost(c:Int):Double = if(c <= 50) 3 * c else 150 + (c - 50) * 3.75
     def coverPrice(c:Int):Double = 24.95 * c
-    def price(c:Int):Double = shippingCost(c) + coverPrice(c)
+    def price(c:Int):Double = (shippingCost(c) + coverPrice(c)) * 40/100
 
     // q5
     def totalRunningTime(e:Int, t:Int): Double = e * 8 + t * 7
