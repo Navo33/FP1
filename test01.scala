@@ -9,9 +9,9 @@ object test extends App {
     def volumeOfSphere(r: Int): Double = (4.0 / 3.0) * 3.14 * r * r * r
 
     // q4
-    def shippingCost(c:Int):Double = if(c <= 50) 3 * c else 150 + (c - 50) * 3.75
-    def coverPrice(c:Int):Double = 24.95 * c
-    def price(c:Int):Double = (shippingCost(c) + coverPrice(c)) * 40/100
+    def shippingCost(c:Int):Double = if(c <= 50) 3 * c else 150 + (c - 50) * 0.75
+    def coverPrice(c:Int):Double = 24.95 * c * (1 - 0.40)
+    def price(c:Int):Double = shippingCost(c) + coverPrice(c)
 
     // q5
     def totalRunningTime(e:Int, t:Int): Double = e * 8 + t * 7
