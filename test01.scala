@@ -10,7 +10,7 @@ object test extends App {
 
     // q4
     def shippingCost(c:Int):Double = if(c <= 50) 3 * c else 150 + (c - 50) * 0.75
-    def coverPrice(c:Int):Double = 24.95 * c * (1 - 0.40)
+    def coverPrice(c:Int):Double = 24.95 * c * 0.6
     def price(c:Int):Double = shippingCost(c) + coverPrice(c)
 
     // q5
