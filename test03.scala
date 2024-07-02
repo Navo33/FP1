@@ -13,8 +13,8 @@ object test extends App {
 
   //Q3
   def arithmeticMean(num1: Int, num2: Int): Double = {
-    val mean = (num1 + num2) / 2.0
-    BigDecimal(mean).setScale(2, BigDecimal.RoundingMode.HALF_UP).toDouble
+    val mean = (num1 + num2) / 2.00
+    "%.2f".format(mean).toDouble
   }
 
   //Q4
@@ -27,7 +27,7 @@ object test extends App {
   println(s"\nInput String: $string1")
   println(s"Reversed String: $string2")
 
-  val inputList = List("name", "christiano", "awesome", "reversed", "rounded", "game")
+  val inputList = List ("name", "christiano", "awesome", "reversed", "rounded", "game")
   val filteredList = filterStrings(inputList)
   println(s"\ninput List: $inputList")
   println(s"Filtered List: $filteredList")
