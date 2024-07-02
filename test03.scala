@@ -13,7 +13,7 @@ object test extends App {
 
   //Q3
   def arithmeticMean(num1: Int, num2: Int): Double = {
-    val mean = (num1 + num2) / 2.00
+    val mean = (num1 + num2) / 3.00
     "%.2f".format(mean).toDouble
   }
 
