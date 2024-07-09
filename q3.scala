@@ -9,9 +9,8 @@ object q3 extends App {
 
   names.foreach {
     case "Benny" => println(formatNames("Benny")(toUpper))
-    case "Niroshan" => println(formatNames("Niroshan")(name => name.take(2).toUpperCase + name.drop(2).toLowerCase))
+    case "Niroshan" => println(formatNames("Niroshan")(name => toUpper(name.take(2)) + toLower(name.drop(2))))
     case "Saman" => println(formatNames("Saman")(toLower))
-    case "Kumara" => println(formatNames("Kumara")(name => name.head.toUpper + name.tail.init.toLowerCase + name.last.toUpper))
+    case "Kumara" => println(formatNames("Kumara")(name => toUpper(name.head.toString) + toLower(name.tail.init) + toUpper(name.last.toString)))
   }
 }
-  
