@@ -1,7 +1,11 @@
 object q3 extends App {
-  def toUpper(x: String): String = x.toUpperCase()
+  def toUpper(x: String): String = {
+    x.map(char => if (char >= 'a' && char <= 'z') (char - 32).toChar else char)
+  }
 
-  def toLower(x: String): String = x.toLowerCase()
+  def toLower(x: String): String = {
+    x.map(char => if (char >= 'A' && char <= 'Z') (char + 32).toChar else char)
+  }
 
   def formatNames(name: String)(format: String => String): String = format(name)
 
