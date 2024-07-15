@@ -1,45 +1,37 @@
-object q1 extends App{
+import scala.io.StdIn.readLine
+object q1 extends App {
+    
+    def getProductList(): List[String] = {
+        var products = List[String]()
+        var productName = ""
 
-    var itemName: Array[String] = Array("Apple", "Banana", "Orange")
-    var itemQuantity: Array[Int] = Array(10, 20, 15)
+        println("Enter products :")
 
-    def displayInventory(): Unit ={
-        println("Inventory:")
-        for (i <- itemName.indices){
-        println(s"${itemName(i)}: ${itemQuantity(i)}")
+        do {
+            productName = readLine()
+            if (productName != "done"){
+                products = products:+ productName
+            }
+        } while(productName != "done")
+
+        products
+
+    }
+
+    def printProductList(products: List[String]): Unit = {
+        println("List of products: ")
+        for (i <- products.indices){
+            println(s"${i+1}. ${products(i)}")
         }
     }
 
-    def restockItem(itemName: String, quantity: Int): Unit ={
-        val index = itemName.indexOf(itemName)
-        if (index >= 0){
-        itemQuantity(index) += quantity
-        println(s"Restocked $itemName with  $quantity")
-        } 
-        else{
-        println(s"Item $itemName does not exist.")
-        }
+    def getTotalProducts(products: List[String]): Int = {
+        products.length
     }
 
-    def sellItem(itemName: String, quantity: Int): Unit ={
-        val index = itemName.indexOf(itemName)
-        if (index >= 0){
-        if (itemQuantity(index) >= quantity){
-            itemQuantity(index) -= quantity
-            println(s"Sold $quantity of $itemName")
-        } 
-        else{
-            println(s"Not enough quantity to sell")
-        }
-        } else{
-        println(s"Item $itemName does not exist")
-        }
-    }
-
-    displayInventory()
-    restockItem("Apple", 5)
-    sellItem("Banana", 25)
-    sellItem("Orange", 10)
-    displayInventory()
+    var productList = getProductList()
+    printProductList(productList)
+    var totalProducts = getTotalProducts(productList)
+    println(s"Total Number of products $totalProducts")
     
 }
