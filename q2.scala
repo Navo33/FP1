@@ -15,7 +15,8 @@ object q2 extends App {
     if (!library.exists(_.isbn == book.isbn)) {
       library += book
       println(s"Book '${book.title}' added.")
-    } else {
+    } 
+    else {
       println(s"Book with ISBN '${book.isbn}' already exists.")
     }
   }
@@ -31,7 +32,7 @@ object q2 extends App {
     }
   }
 
-  def isBookInLibrary(isbn: String): Boolean = {
+  def isInLibrary(isbn: String): Boolean = {
     library.exists(_.isbn == isbn)
   }
 
@@ -40,7 +41,7 @@ object q2 extends App {
     library.foreach(book => println(s"Title: ${book.title}, Author: ${book.author}, ISBN: ${book.isbn}"))
   }
 
-  def searchBookByTitle(title: String): Unit = {
+  def searchByTitle(title: String): Unit = {
     val book = library.find(_.title.equalsIgnoreCase(title))
     book match {
       case Some(b) =>
@@ -50,22 +51,28 @@ object q2 extends App {
     }
   }
 
-  def displayBooksByAuthor(author: String): Unit = {
+  def displayByAuthor(author: String): Unit = {
     val booksByAuthor = library.filter(_.author.equalsIgnoreCase(author))
     if (booksByAuthor.nonEmpty) {
       println(s"Books by $author:")
       booksByAuthor.foreach(book => println(s"Title: ${book.title}, ISBN: ${book.isbn}"))
-    } else {
+    } 
+    else {
       println(s"No books found by author '$author'.")
     }
   }
 
-  // Example usage
   displayLibrary()
+  println(" ")
   addBook(Book("Brave New World", "Aldous Huxley", "4567890123"))
+  println(" ")
   removeBook("2345678901")
-  println(s"Is book with ISBN '1234567890' in the library? ${isBookInLibrary("1234567890")}")
-  searchBookByTitle("1984")
-  displayBooksByAuthor("George Orwell")
+  println(" ")
+  isInLibrary("1234567890")
+  println(" ")
+  searchByTitle("1984")
+  println(" ")
+  displayByAuthor("George Orwell")
+  println(" ")
   displayLibrary()
 }
