@@ -1,23 +1,23 @@
-import scala.io.StdIn.readLine
+import scala.io.StdIn.readInt
 
 object q3 extends App {
 
-  def fibonacci(n: Int): Unit = {
-    
-    for (i <- 0 until n) {
-      println(fib(i))
-    }
-
-    def fib(n: Int): Int = {
-      if (n <= 1) {
-        n
-      } else {
-        fib(n - 1) + fib(n - 2)
-      }
+  def fibonacci(n: Int): List[Int] = {
+    if (n == 1) {
+      List(0)
+    } 
+    else if (n == 2) {
+      List(0, 1)
+    } 
+    else {
+      val list = fibonacci(n - 1)
+      list :+ (list(list.size - 1) + list(list.size - 2))
     }
   }
 
   println("Enter the number of Fibonacci numbers to print:")
-  val n = scala.io.StdIn.readInt()
-  fibonacci(n)
+  val n = readInt()
+  val fibList = fibonacci(n)
+  println("List: ")
+  fibList.foreach(println)
 }
