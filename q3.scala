@@ -1,23 +1,20 @@
-import scala.io.StdIn.readInt
-
 object q3 extends App {
-
-  def fibonacci(n: Int): List[Int] = {
-    if (n == 1) {
-      List(0)
-    } 
-    else if (n == 2) {
-      List(0, 1)
-    } 
-    else {
-      val list = fibonacci(n - 1)
-      list :+ (list(list.size - 1) + list(list.size - 2))
+    def toUpper(x: String): String = {
+        x.map(char => if (char >= 'a' && char <= 'z') (char - 32).toChar else char)
     }
-  }
 
-  println("Enter the number of Fibonacci numbers to print:")
-  val n = readInt()
-  val fibList = fibonacci(n)
-  println("List: ")
-  fibList.foreach(println)
+    def toLower(x: String): String = {
+        x.map(char => if (char >= 'A' && char <= 'Z') (char + 32).toChar else char)
+    }
+
+    def formatNames(name: String)(format: String => String): String = format(name)
+
+    val names = List("Benny", "Niroshan", "Saman", "Kumara")
+
+    names.foreach {
+        case "Benny" => println(formatNames("Benny")(toUpper))
+        case "Niroshan" => println(formatNames("Niroshan")(name => toUpper(name.take(2)) + toLower(name.drop(2))))
+        case "Saman" => println(formatNames("Saman")(toLower))
+        case "Kumara" => println(formatNames("Kumara")(name => toUpper(name.head.toString) + toLower(name.tail.init) + toUpper(name.last.toString)))
+    }
 }
