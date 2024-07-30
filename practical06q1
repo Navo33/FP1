@@ -1,49 +1,61 @@
+object InventoryManager extends App {
 
-object q1 extends App {
-  // Example inventory1
   val inventory1 = Map(
     101 -> ("Apple", 10, 5.0),
     102 -> ("Orange", 20, 10.0),
     103 -> ("Banana", 30, 15.0)
   )
 
-  // Example inventory2
   val inventory2 = Map(
     105 -> ("Pineapple", 10, 12.0),
-    106 -> ("Grapes", 20, 14.0),
+    103 -> ("Banana", 20, 15.0),
     107 -> ("Pears", 40, 20.0)
   )
 
-  // Retrieve all product names
-  val productNames = inventory1.values.map(_._1)
+  def retrieveProductNames(inventory: Map[Int, (String, Int, Double)]): Iterable[String] = {
+    inventory.values.map(_._1)
+  }
+
+  def calculateTotalValue(inventory: Map[Int, (String, Int, Double)]): Double = {
+    inventory.values.map { case (_, quantity, price) => quantity * price }.sum
+  }
+
+  def checkIfEmpty(inventory: Map[Int, (String, Int, Double)]): Boolean = {
+    inventory.isEmpty
+  }
+
+  def mergeInventories(inventory1: Map[Int, (String, Int, Double)], inventory2: Map[Int, (String, Int, Double)]): Map[Int, (String, Int, Double)] = {
+    (inventory1.toSeq ++ inventory2.toSeq)
+      .groupBy(_._1)
+      .map { case (id, values) =>
+        val (name, totalQuantity, highestPrice) = values.map(_._2).reduce { (a, b) =>
+          (a._1, a._2 + b._2, math.max(a._3, b._3))
+        }
+        (id, (name, totalQuantity, highestPrice))
+      }
+  }
+
+  def checkProductExists(inventory: Map[Int, (String, Int, Double)], productId: Int): Unit = {
+    inventory.get(productId) match {
+      case Some((name, quantity, price)) =>
+        println(s"Product ID: $productId, Name: $name, Quantity: $quantity, Price: $price")
+      case None =>
+        println(s"Product with ID $productId does not exist in inventory.")
+    }
+  }
+
+  // Using the functions
+  val productNames = retrieveProductNames(inventory1)
   println("Product Names: " + productNames.mkString(", "))
 
-  // Calculate the total value of all products
-  val totalValue = inventory1.values.map { case (_, quantity, price) => quantity * price }.sum
+  val totalValue = calculateTotalValue(inventory1)
   println("Total Value: " + totalValue)
 
-  // Check if is empty
-  val isEmpty = inventory1.isEmpty
+  val isEmpty = checkIfEmpty(inventory1)
   println("Is inventory1 empty? " + isEmpty)
 
-  // Merge inventory1 and inventory2
-  val mergedInventory = (inventory1.toSeq ++ inventory2.toSeq)
-    .groupBy(_._1)
-    .map { case (id, values) =>
-      val (name, totalQuantity, highestPrice) = values.map(_._2).reduce { (a, b) =>
-        (a._1, a._2 + b._2, math.max(a._3, b._3))
-      }
-      (id, (name, totalQuantity, highestPrice))
-    }
-
+  val mergedInventory = mergeInventories(inventory1, inventory2)
   println("Merged Inventory: " + mergedInventory)
 
-  // Check if a product exists
-  val productId = 102
-  inventory1.get(productId) match {
-    case Some((name, quantity, price)) =>
-      println(s"Product ID: $productId, Name: $name, Quantity: $quantity, Price: $price")
-    case None =>
-      println(s"Product with ID $productId does not exist in inventory1.")
-  }
+  checkProductExists(inventory1, 102)
 }
