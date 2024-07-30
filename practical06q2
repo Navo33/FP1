@@ -35,7 +35,7 @@ object q2 extends App {
     val (name, marks, totalMarks, percentage, grade) = record
     println(s"Name: $name")
     println(s"Marks: $marks/$totalMarks")
-    println(s"Percentage: ${percentage}%.2f%%")
+    println(s"Percentage: ${String.format("%.2f", percentage)}%%")
     println(s"Grade: $grade")
   }
 
