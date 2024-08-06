@@ -1,15 +1,10 @@
-import scala.io.StdIn._
-
 object q2 extends App {
-    def patternMatching(x: Int):Unit = x match {
-        case x if x <= 0 => println("Negative/Zero is input")
-        case x if x % 2 == 0 => println("Even number")
-        case _ => println("Odd number")
-    }
+  def calculateSquare(numbers: List[Int]): List[Int] = {
+    numbers.map(num => num * num)
+  }
 
-    println("Input: ")
-    val num = readInt()
-    patternMatching(num)
+  val inputList = List(1, 2, 3, 4, 5)
+  val squared = calculateSquare(inputList)
+  
+  println("Squared numbers: " + squared.mkString(", "))
 }
-
-
